@@ -1,0 +1,18 @@
+.button {
+  padding: 15px 146px;
+  border-radius: 5px;
+  border: none;
+  background-image: linear-gradient(rgba(255, 204, 2, 1), rgba(255, 145, 1, 1));
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  font-weight: 400;
+}
+.button-outline {
+  padding: 15px 146px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 145, 1, 1);
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(37, 36, 34, 1);
+  font-size: 14px;
+  font-weight: 400;
+}

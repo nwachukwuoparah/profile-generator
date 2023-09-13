@@ -1,0 +1,18 @@
+.profile-container {
+  width: 100vw;
+  height: 150vh;
+  background-color: #023047;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-img {
+  width: 85px;
+  height: 57px;
+  position: relative;
+  right: 545px;
+  top: 52px;
+  object-fit: scale-down;
+}

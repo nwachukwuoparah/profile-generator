@@ -1,6 +1,9 @@
-import  { useRef } from "react"
+import { useRef } from "react"
+import "./profile.css"
 import html2canvas from 'html2canvas';
+import logo from "../../public/Group 7.svg"
 import Card from "../components/Card";
+import Button from "../components/Button";
 
 const Profile = () => {
     const captureRef = useRef<HTMLDivElement | null>(null);
@@ -21,10 +24,11 @@ const Profile = () => {
 
 
     return (
-        <div style={{ width: "100vw", height: "100vh", alignItems: "center", justifyContent: "center" }}>
+        <div className="profile-container">
             <Card captureRef={captureRef} />
             <a ref={downloadLinkRef} style={{ display: 'none' }}>Download Image</a>
-            <button className="" onClick={handleDownloadClick}>Generate Download</button>
+            <Button handleClick={handleDownloadClick} children="Download" type="filled" />
+            <Button handleClick={handleDownloadClick} children="Download" type="out-line" />
         </div>
 
     )
