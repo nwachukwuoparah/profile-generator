@@ -7,3 +7,8 @@ export interface profileType {
     downloadLink: HTMLAnchorElement | null;
     handleDownloadClick: () => void;
 }
+
+export interface inputType {
+    type: string;
+
+}
