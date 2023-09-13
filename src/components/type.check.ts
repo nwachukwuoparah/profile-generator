@@ -10,5 +10,10 @@ export interface profileType {
 
 export interface inputType {
     type: string;
+
+}
+
+export interface inputType {
+    type: string;
     placeholder: string;
 }
