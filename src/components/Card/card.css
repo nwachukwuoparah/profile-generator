@@ -1,0 +1,35 @@
+.card {
+  width: 38.1%;
+  background-color: #f6f5f6;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  margin-top: 160px;
+  overflow: hidden;
+}
+
+.card-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+}
+
+.circle {
+  position: relative;
+  top: -200px;
+  left: 300px;
+  border-radius: 50%;
+  width: 352px;
+  height: 352px;
+  background-color: rgba(255, 204, 2, 0.7);
+}
+
+.circle-contain {
+  position: relative;
+  bottom: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

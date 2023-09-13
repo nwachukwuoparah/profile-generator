@@ -11,3 +11,9 @@ export interface inputType {
     type: string;
     placeholder: string;
 }
+
+export interface buttonType {
+    handleClick: () => void
+    children: string
+    type: string
+}
