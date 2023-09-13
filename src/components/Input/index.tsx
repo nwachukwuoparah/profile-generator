@@ -1,22 +1,20 @@
 import { inputType } from "../type.check"
 import './input.css'
-const Input = ({ type, placeholder }: inputType) => {
+const Input = ({ type, placeholder, name, icon }: inputType) => {
     switch (type) {
         case "text":
             return (
-                <div className="InputMainWrap">
-                    <div className="InputWrap">
-                        <img src="/user.svg" className="InputImage"/>
-                        <input type="text" className="InputField" placeholder={placeholder} />
-                    </div>
+                <div className="input-wrap">
+                    <img src={icon} className="input-image" />
+                    <input type="text" className="input-field" placeholder={placeholder} />
                 </div>
             )
         case "select":
             return (
-                <select className="InputSelectWrap">
-                    <option className="inputSelect">Stack</option>
-                    <option className="inputSelect">Frontend Development</option>
-                    <option className="inputSelect">Backend Development</option>
+                <select className="input-wrap">
+                    <option>Stack</option>
+                    <option>Frontend Development</option>
+                    <option>Backend Development</option>
                 </select>
             )
         default:

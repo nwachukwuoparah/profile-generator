@@ -16,3 +16,10 @@
   top: 52px;
   object-fit: scale-down;
 }
+
+.profile-button-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 28%;
+}

@@ -10,10 +10,13 @@ export interface profileType {
 export interface inputType {
     type: string;
     placeholder: string;
+    name: string;
+    icon: string;
 }
 
 export interface buttonType {
     handleClick: () => void
-    children: string
-    type: string
+    children: string;
+    type: string;
+    style?: any
 }

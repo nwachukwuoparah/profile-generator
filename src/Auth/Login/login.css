@@ -1,3 +1,11 @@
+.LoginForm{
+    width: 100vw;
+    height: 100vh;
+    background-color: #023047;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .LoginMain{
     width: 450px;
     height: 450px;
@@ -8,4 +16,17 @@
     justify-content: center;
     gap: 20px;
     border-radius: 5px;
+    padding: 10px;
+}
+.DecisionDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.DontHaveAccount{
+    font-family: 'poppins';
+}
+.SignUpDecision{
+    font-weight: 1000;
 }

@@ -2,11 +2,11 @@
 import "./button.css"
 import { buttonType } from "../type.check";
 
-const Button = ({ handleClick, children, type }: buttonType) => {
+const Button = ({ handleClick, children, type, style }: buttonType) => {
     switch (type) {
         case "filled":
             return (
-                <button className="button" onClick={handleClick}> {children}</button >
+                <button style={style} className="button" onClick={handleClick}> {children}</button >
             )
         case "out-line":
             return (
