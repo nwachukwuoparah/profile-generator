@@ -1,9 +1,7 @@
 .card {
   width: 38.1%;
+  height: 523px;
   background-color: #f6f5f6;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border-radius: 5px;
   margin-top: 160px;
   overflow: hidden;
@@ -13,23 +11,76 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: red;
 }
 
 .circle {
   position: relative;
-  top: -200px;
-  left: 300px;
+  top: -355px;
+  left: 228px;
   border-radius: 50%;
-  width: 352px;
-  height: 352px;
+  width: 500px;
+  height: 500px;
   background-color: rgba(255, 204, 2, 0.7);
 }
 
-.circle-contain {
-  position: relative;
-  bottom: 300px;
+.card-contain {
+  position: absolute;
+  bottom: 130px;
+  left: 535px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 10px;
+}
+
+.image-contain {
+  width: 220px;
+  height: 220px;
+  background-color: rgba(255, 211, 193, 40%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+  overflow: hidden;
+  border: 1px solid rgba(255, 204, 2, 1);
+}
+.image-contain {
+  margin-top: 30px;
+}
+.image-contain img {
+  position: relative;
+  top: 20px;
+  width: 100%;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(37, 36, 34, 1);
+}
+p {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(68, 68, 68, 1);
+}
+h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 145, 1, 1);
+}
+
+.socials {
+  position: relative;
+  bottom: 38px;
+  left: 20px;
+}
+.socials span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.socials p {
+line-height: 30px;
 }
