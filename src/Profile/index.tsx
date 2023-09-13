@@ -27,8 +27,10 @@ const Profile = () => {
         <div className="profile-container">
             <Card captureRef={captureRef} />
             <a ref={downloadLinkRef} style={{ display: 'none' }}>Download Image</a>
-            <Button handleClick={handleDownloadClick} children="Download" type="filled" />
-            <Button handleClick={handleDownloadClick} children="Download" type="out-line" />
+            <div className="profile-button-wrap">
+                <Button handleClick={handleDownloadClick} children="Download" type="filled" />
+                <Button handleClick={handleDownloadClick} children="Download" type="out-line" />
+            </div>
         </div>
 
     )
