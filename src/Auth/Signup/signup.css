@@ -75,5 +75,6 @@
 @media screen and (max-width: 425px) {
   .signup-contain {
     width: 95%;
+    margin-top: 10vh;
   }
 }

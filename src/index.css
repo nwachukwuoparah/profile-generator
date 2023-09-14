@@ -4,8 +4,17 @@
   box-sizing: border-box;
 }
 .logo {
-  position: sticky;
+  position: absolute;
   align-self: flex-start;
   left: 53px;
   top: 48px;
+}
+
+@media screen and (max-width: 425px) {
+  .logo {
+    position: absolute;
+    align-self: flex-start;
+    left: 23px;
+    top: 30px;
+  }
 }
