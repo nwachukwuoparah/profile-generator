@@ -61,3 +61,11 @@
   gap: 10px;
   width: 75%;
 }
+
+
+@media screen and (max-width: 425px) {
+  .login-contain {
+    width: 95%;
+    height: 57.5vh;
+  }
+}

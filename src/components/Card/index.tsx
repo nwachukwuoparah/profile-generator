@@ -16,7 +16,7 @@ const Card: React.FC<cardType> = ({ value, captureRef }) => {
             ref={captureRef}
             className="card"
         >
-            <div className="circle"></div>
+            <img src="/Ellipse.svg" className="circle" />
             <div className="card-contain">
                 <img src={logoblack} alt="image" />
                 <div className="image-contain">

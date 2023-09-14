@@ -1,4 +1,6 @@
 .card {
+  display: flex;
+  flex-direction: column;
   width: 38.1%;
   height: 523px;
   background-color: #f6f5f6;
@@ -14,19 +16,13 @@
 }
 
 .circle {
-  position: relative;
-  top: -355px;
-  left: 228px;
-  border-radius: 50%;
-  width: 500px;
-  height: 500px;
-  background-color: rgba(255, 204, 2, 0.7);
+  align-self: flex-end;
+  width: 245px;
+  border-radius: 5px;
 }
 
 .card-contain {
-  position: absolute;
-  bottom: 130px;
-  left: 535px;
+  margin-top: -130px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -44,12 +40,10 @@
   object-fit: contain;
   overflow: hidden;
   border: 1px solid rgba(255, 204, 2, 1);
-}
-.image-contain {
-  margin-top: 30px;
+  margin-top: 35px;
 }
 .image-contain img {
-  /* position: relative; */
+  position: relative;
   top: 20px;
   width: 100%;
 }
@@ -72,15 +66,51 @@ h5 {
 
 .socials {
   position: relative;
-  bottom: 38px;
+  top: 30px;
   left: 20px;
 }
 .socials span {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
 }
 
 .socials p {
-line-height: 30px;
+  line-height: 30px;
+}
+
+@media screen and (max-width: 425px) {
+  .card {
+    width: 95%;
+    height: 500px;
+    background-color: #f6f5f6;
+    border-radius: 5px;
+    margin-top: 70px;
+    overflow: hidden;
+  }
+  .card-contain {
+    margin-top: -78px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .circle {
+    align-self: left;
+    width: 200px;
+    border-radius: 5px;
+  }
+
+  .image-contain {
+    width: 160px;
+    height: 160px;
+    margin-top: 20px;
+  }
+
+  .socials {
+    position: relative;
+    top: 60px;
+    left: 20px;
+  }
 }

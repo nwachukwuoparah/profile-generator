@@ -11,25 +11,6 @@ const Profile = () => {
     const downloadLinkRef = useRef<HTMLAnchorElement | null>(null);
     const [img, setImg] = useState<string>("")
 
-
-    const handleDownloadClick = () => {
-        const downloadLink = downloadLinkRef.current;
-        if (captureRef.current && downloadLink) {
-            html2canvas(captureRef.current)
-                .then(function (canvas) {
-                    const url = canvas.toDataURL("image/png");
-                    downloadLink.href = url;
-                    downloadLink.download = 'profile.png';
-                    downloadLink.style.display = 'block';
-                    setImg(url)
-                })
-                .catch(function (error) {
-                    console.error('Error generating image:', error);
-                });
-        }
-    };
-
-
     useEffect(() => {
         console.log(downloadLinkRef)
 
@@ -44,19 +25,37 @@ const Profile = () => {
             console.log(error);
         },
     });
+
+    const handleDownloadClick = () => {
+        const html2canvasOptions = {
+            allowTaint: true,
+            useCORS: true,
+        };
+        const downloadLink = downloadLinkRef.current;
+        if (captureRef.current && downloadLink) {
+            html2canvas(captureRef.current, html2canvasOptions)
+                .then(function (canvas) {
+                    const url = canvas.toDataURL("image/png");
+                    downloadLink.href = url;
+                    downloadLink.download = `${data?.data?.data.fullName}.png`;
+                    downloadLink.style.display = 'block';
+                    setImg(url)
+                })
+                .catch(function (error) {
+                    console.error('Error generating image:', error);
+                });
+        }
+    };
+
     useEffect(() => {
         console.log(isFetching);
-        console.log(data?.data?.data)
+        console.log(data?.data?.data.fullName)
     }, [isFetching])
 
     return (
         <div className="profile-container">
             {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
-            {img && <img style={{
-                width: "38.1%",
-                height: 523,
-                marginTop: 80
-            }} src={img} />}
+            {img && <img className="preview-download" src={img} />}
             <div className="profile-button-wrap">
                 {!img && <Button handleClick={handleDownloadClick} children="Generate" type="filled" />}
                 {!img && <Button handleClick={handleDownloadClick} children="Edit" type="out-line" />}

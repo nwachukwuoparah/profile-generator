@@ -1,6 +1,6 @@
 .profile-container {
   width: 100vw;
-  height: 150vh;
+  height: 120vh;
   background-color: #023047;
   display: flex;
   flex-direction: column;
@@ -22,4 +22,26 @@
   flex-direction: column;
   gap: 20px;
   width: 28%;
+}
+
+.preview-download {
+  width: 38.1%;
+  height: 523px;
+  margin-top: 160px;
+}
+
+@media screen and (max-width: 425px) {
+  .profile-container {
+    height: 100vh;
+  }
+
+  .profile-button-wrap {
+    width: 95%;
+  }
+
+  .preview-download {
+    width: 95%;
+    height: 500px;
+    margin-top: 70px;
+  }
 }
