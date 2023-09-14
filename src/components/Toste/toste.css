@@ -8,6 +8,7 @@
   height: 50px;
   transition: ease-in-out 1s;
   background-color: white;
+  font-family: "Roboto", sans-serif;
 }
 
 .toste::after {
