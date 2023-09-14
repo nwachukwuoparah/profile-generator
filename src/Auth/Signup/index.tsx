@@ -31,25 +31,29 @@ const Signup = () => {
             name: "fullName",
             type: "text",
             placeholder: "Fullname",
+            inputType: "text",
             icon: "/user.svg"
         },
         {
             name: "email",
             type: "text",
             placeholder: "Email",
+            inputType: "text",
             icon: "/sms.svg"
         },
         {
             name: "password",
             type: "text",
             placeholder: "Password",
-            icon: "/lock.svg"
+            icon: "/lock.svg",
+            inputType: "password",
         },
         {
             name: "stack",
             type: "select",
             placeholder: "",
-            icon: ""
+            icon: "",
+            inputType: "text",
         },
     ]
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
@@ -80,7 +84,7 @@ const Signup = () => {
                 >{`${errors?.["profilePicture"]?.message}`}</span>}
 
                 <div className="signup-input-wrap">
-                    {inputData.map((i) => (<Input errors={errors} {...i} register={register} />))}
+                    {inputData.map((i) => (<Input {...i} register={register} errors={errors} />))}
                     <Button style={{ marginTop: 15 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
                 </div>
                 <span>Already have an account?

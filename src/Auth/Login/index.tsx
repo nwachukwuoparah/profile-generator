@@ -17,12 +17,14 @@ const Login = () => {
         {
             name: "email",
             type: "text",
+            inputType:"text",
             placeholder: "Email",
             icon: "/sms.svg"
         },
         {
             name: "password",
             type: "text",
+            inputType:"password",
             placeholder: "Password",
             icon: "/lock.svg"
         }

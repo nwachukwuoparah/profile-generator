@@ -1,6 +1,7 @@
 import "./button.css"
 import { buttonType } from "../type.check";
 
+
 const Button = ({ handleClick, children, type, style, isLoading }: buttonType) => {
     switch (type) {
         case "filled":
