@@ -37,7 +37,6 @@ const Profile = () => {
     const {
         data,
         isFetching,
-        error,
     } = useQuery(["getUser"], getUser, {
         enabled: !!localStorage.getItem("token"),
         refetchOnWindowFocus: false,

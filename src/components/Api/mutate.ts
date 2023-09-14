@@ -1,6 +1,5 @@
 const { VITE_End_Point } = import.meta.env;
 import axios from "axios";
-const { VITE_userToken } = import.meta.env;
 
 export const signUp = (data: any): any => {
     console.log(data, VITE_End_Point)

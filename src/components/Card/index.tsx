@@ -1,7 +1,6 @@
 import { cardType } from "../type.check";
 import "./card.css"
 import React from "react"
-import image from "../../../public/_Downloader 6.png"
 import logoblack from "../../../public/Logo.svg"
 import facebook from "../../../public/facebook.svg"
 import linkdin from "../../../public/linkedin.svg"

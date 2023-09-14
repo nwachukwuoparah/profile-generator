@@ -1,4 +1,4 @@
-import { UseFormRegister, Path } from "react-hook-form"
+import { UseFormRegister } from "react-hook-form"
 export interface cardType {
     captureRef: React.RefObject<HTMLDivElement>;
     value: any
