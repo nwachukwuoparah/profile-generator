@@ -25,7 +25,8 @@ const Signup = () => {
         isLoading,
         mutate,
     } = useMutation(["compliance"], signUp, {
-        onSuccess: async () => {
+        onSuccess: async (data: any) => {
+            console.log(data)
             setToste(true)
             setTimeout(() => {
                 navigate("/");
