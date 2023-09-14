@@ -8,23 +8,25 @@ import { loginSchema } from "../../components/schema";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../components/Api/mutate";
+import Toste from "../../components/Toste/toste";
+import { useEffect, useState } from "react";
 
 
 const Login = () => {
     const navigate = useNavigate()
-
+    const [toste, setToste] = useState<boolean>(false)
     const inputData = [
         {
             name: "email",
             type: "text",
-            inputType:"text",
+            inputType: "text",
             placeholder: "Email",
             icon: "/sms.svg"
         },
         {
             name: "password",
             type: "text",
-            inputType:"password",
+            inputType: "password",
             placeholder: "Password",
             icon: "/lock.svg"
         }
@@ -39,21 +41,36 @@ const Login = () => {
     })
 
     const {
+        data,
+        error,
         isLoading,
         mutate,
     } = useMutation(["compliance"], login, {
         onSuccess: async (data: any) => {
             localStorage.setItem("token", data?.data.token)
+            setToste(true)
             setTimeout(() => {
                 navigate("/profile");
-            }, 500)
+            }, 1000)
         },
+        onError: (err: any) => {
+            console.log(err?.response?.data?.message)
+            setToste(true)
+        }
     });
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (toste === true)
+                setToste(false)
+        }, 3000)
+    }, [error])
 
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => mutate(data)
     return (
         <div className="login">
+            <Toste suscess={data?.data.message} error={error?.response?.data?.message} toste={toste} top="155px" />
             <div className="login-contain">
                 <p>Log In</p>
                 <div className="login-input-wrap">

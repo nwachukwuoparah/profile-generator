@@ -8,9 +8,11 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { signupSchema } from "../../components/schema";
 import { useMutation } from "@tanstack/react-query";
 import { signUp } from "../../components/Api/mutate";
+import Toste from "../../components/Toste/toste";
+import { useEffect, useState } from "react";
 const Signup = () => {
     const navigate = useNavigate()
-
+    const [toste, setToste] = useState<boolean>(false)
     const { register, handleSubmit, formState: { errors } } = useForm<any>(
         {
             resolver: yupResolver(signupSchema)
@@ -18,12 +20,22 @@ const Signup = () => {
     )
 
     const {
+        error,
+        data,
         isLoading,
         mutate,
     } = useMutation(["compliance"], signUp, {
-        onSuccess: async () => {
-            navigate("/");
+        onSuccess: async (data: any) => {
+            setToste(true)
+            setTimeout(() => {
+                navigate("/");
+            }, 1000)
+
         },
+        onError: (err: any) => {
+            setToste(true)
+            console.log(err?.response?.data?.message)
+        }
     });
 
     const inputData = [
@@ -61,10 +73,16 @@ const Signup = () => {
         console.log({ ...others, profilePicture: profilePicture?.[0] })
         mutate({ ...others, profilePicture: profilePicture?.[0] })
     }
-
+    useEffect(() => {
+        setTimeout(() => {
+            if (toste === true)
+                setToste(false)
+        }, 3000)
+    }, [error])
 
     return (
         <div className="signup">
+            <Toste suscess={data?.data?.message} error={error?.response?.data?.message} toste={toste} top="140px" />
             <div className="signup-contain">
                 <p>Sign Up</p>
                 <label>
