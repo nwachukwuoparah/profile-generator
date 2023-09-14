@@ -14,8 +14,8 @@ const Input = ({ type, inputType, placeholder, name, icon, register, errors }: i
                     <div className="input-wrap" style={{ border: errors?.[name] && "1px solid red" }}>
                         <img src={icon} className="input-image" />
                         <input type={toggle ? "text" : inputType} className="input-field" {...register(name)} placeholder={placeholder} />
-                        {inputType === "password" && (!toggle ? <BsFillEyeSlashFill fontSize={25} onClick={() => setToggle(!toggle)} /> :
-                            <BsFillEyeFill fontSize={25} onClick={() => setToggle(!toggle)} />)}
+                        {inputType === "password" && (!toggle ? <BsFillEyeSlashFill color="grey" fontSize={25} onClick={() => setToggle(!toggle)} /> :
+                            <BsFillEyeFill fontSize={25} color="grey" onClick={() => setToggle(!toggle)} />)}
                     </div>
                     <div style={{ lineHeight: 2, color: "red", fontSize: 14 }}>{errors?.[name]?.message}</div>
                 </>
