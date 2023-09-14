@@ -1,10 +1,11 @@
 .signup {
   width: 100vw;
-  height: 121.5vh;
+   min-height: 100vh;
   background-color: #023047;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 50px 0px;
 }
 
 .signup-contain {
@@ -70,10 +71,6 @@
 }
 
 @media screen and (max-width: 425px) {
-  .signup {
-    width: 100vw;
-    max-height: 100vh;
-  }
   .signup-contain {
     width: 95%;
   }
