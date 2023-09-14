@@ -72,7 +72,7 @@
 @media screen and (max-width: 425px) {
   .signup {
     width: 100vw;
-    min-height: 100vh;
+    max-height: 100vh;
   }
   .signup-contain {
     width: 95%;
