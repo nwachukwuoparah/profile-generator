@@ -1,4 +1,3 @@
-// import React from "react"
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -9,7 +8,6 @@ import { loginSchema } from "../../components/schema";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../components/Api/mutate";
-import { useEffect } from "react";
 
 
 const Login = () => {
@@ -39,8 +37,6 @@ const Login = () => {
     })
 
     const {
-        data,
-        error,
         isLoading,
         mutate,
     } = useMutation(["compliance"], login, {
@@ -50,15 +46,8 @@ const Login = () => {
                 navigate("/profile");
             }, 500)
         },
-        onError: async (error) => {
-        },
     });
 
-    useEffect(() => {
-        console.log(data)
-        console.log(error)
-        console.log(isLoading)
-    }, [data, error, isLoading])
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => mutate(data)
 

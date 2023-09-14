@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { signupSchema } from "../../components/schema";
 import { useMutation } from "@tanstack/react-query";
 import { signUp } from "../../components/Api/mutate";
-import { useEffect } from "react";
 const Signup = () => {
     const navigate = useNavigate()
 
@@ -19,23 +18,14 @@ const Signup = () => {
     )
 
     const {
-        data,
-        error,
         isLoading,
         mutate,
     } = useMutation(["compliance"], signUp, {
-        onSuccess: async (data) => {
+        onSuccess: async () => {
             navigate("/");
-        },
-        onError: async (error) => {
         },
     });
 
-    useEffect(() => {
-        console.log(data)
-        console.log(error)
-        console.log(isLoading)
-    }, [data, error, isLoading])
     const inputData = [
         {
             name: "fullName",
