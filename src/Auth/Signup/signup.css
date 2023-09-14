@@ -1,6 +1,6 @@
 .signup {
   width: 100vw;
-   min-height: 100vh;
+  min-height: 100vh;
   background-color: #023047;
   display: flex;
   align-items: center;
@@ -76,5 +76,9 @@
   .signup-contain {
     width: 95%;
     margin-top: 10vh;
+  }
+
+  .signup-input-wrap {
+    width: 85%;
   }
 }
