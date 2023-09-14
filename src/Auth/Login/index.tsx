@@ -70,6 +70,7 @@ const Login = () => {
     const onSubmit: SubmitHandler<IFormInput> = (data) => mutate(data)
     return (
         <div className="login">
+             <img src="/ThecurveLogo.svg" className="logo" />
             <Toste suscess={data?.data.message} error={error?.response?.data?.message} toste={toste} top="155px" />
             <div className="login-contain">
                 <p>Log In</p>

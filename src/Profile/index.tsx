@@ -48,15 +48,19 @@ const Profile = () => {
 
     return (
         <div className="profile-container">
-            {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
-            {img && <img className="preview-download" src={img} />}
+            <img src="/ThecurveLogo.svg" className="logo" />
+            {/* <div style={{ width: "100vw" }}> */}
+
             <div className="profile-button-wrap">
+                {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
+                {img && <img className="preview-download" src={img} />}
                 <a ref={downloadLinkRef} style={{ display: img ? "block" : 'none' }}><Button children="Download" type="filled" /></a>
-                {img && <Button handleClick={() => {setImg("") }} children="Back" type="out-line" />}
+                {img && <Button handleClick={() => { setImg("") }} children="Back" type="out-line" />}
 
                 {!img && <Button handleClick={handleDownloadClick} children="Generate" type="filled" />}
                 {!img && <Button handleClick={() => { }} children="Edit" type="out-line" />}
             </div>
+            {/* </div> */}
         </div>
 
     )

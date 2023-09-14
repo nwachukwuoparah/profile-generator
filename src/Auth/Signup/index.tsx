@@ -83,6 +83,7 @@ const Signup = () => {
 
     return (
         <div className="signup">
+             <img src="/ThecurveLogo.svg" className="logo" />
             <Toste suscess={data?.data?.message} error={error?.response?.data?.message} toste={toste} top="140px" />
             <div className="signup-contain">
                 <p>Sign Up</p>
