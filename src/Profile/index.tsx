@@ -1,35 +1,67 @@
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import "./profile.css"
 import html2canvas from 'html2canvas';
-import logo from "../../public/Group 7.svg"
 import Card from "../components/Card";
 import Button from "../components/Button";
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "../components/Api/query";
 
 const Profile = () => {
     const captureRef = useRef<HTMLDivElement | null>(null);
     const downloadLinkRef = useRef<HTMLAnchorElement | null>(null);
+    const [img, setImg] = useState<string>("")
+
 
     const handleDownloadClick = () => {
         const downloadLink = downloadLinkRef.current;
         if (captureRef.current && downloadLink) {
-            html2canvas(captureRef.current).then(function (canvas) {
-                const url = canvas.toDataURL("image/png");
-                downloadLink.href = url;
-                downloadLink.download = 'profile.png';
-                downloadLink.style.display = 'none';
-                downloadLink.click();
-            });
+            html2canvas(captureRef.current)
+                .then(function (canvas) {
+                    const url = canvas.toDataURL("image/png");
+                    downloadLink.href = url;
+                    downloadLink.download = 'profile.png';
+                    downloadLink.style.display = 'block';
+                    setImg(url)
+                })
+                .catch(function (error) {
+                    console.error('Error generating image:', error);
+                });
         }
     };
 
 
+    useEffect(() => {
+        console.log(downloadLinkRef)
+
+    }, [downloadLinkRef])
+    const {
+        data,
+        isFetching,
+    } = useQuery(["getUser"], getUser, {
+        enabled: !!localStorage.getItem("token"),
+        refetchOnWindowFocus: false,
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+    useEffect(() => {
+        console.log(isFetching);
+        console.log(data?.data?.data)
+    }, [isFetching])
+
     return (
         <div className="profile-container">
-            <Card captureRef={captureRef} />
-            <a ref={downloadLinkRef} style={{ display: 'none' }}>Download Image</a>
+            {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
+            {img && <img style={{
+                width: "38.1%",
+                height: 523,
+                marginTop: 80
+            }} src={img} />}
             <div className="profile-button-wrap">
-                <Button handleClick={handleDownloadClick} children="Download" type="filled" />
-                <Button handleClick={handleDownloadClick} children="Download" type="out-line" />
+                {!img && <Button handleClick={handleDownloadClick} children="Generate" type="filled" />}
+                {!img && <Button handleClick={handleDownloadClick} children="Edit" type="out-line" />}
+                <a ref={downloadLinkRef} style={{ display: 'none' }}><Button children="Download" type="filled" /></a>
+                {/* {img && <Button handleClick={() => setImg("")} children="Back" type="out-line" />} */}
             </div>
         </div>
 

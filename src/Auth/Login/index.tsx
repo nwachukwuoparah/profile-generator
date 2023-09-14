@@ -1,35 +1,65 @@
-// import React from "react"
+import { IFormInput } from "../../components/type.check";
+import { yupResolver } from "@hookform/resolvers/yup"
+import { loginSchema } from "../../components/schema";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "../../components/Api/mutate";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import './login.css'
-// import { inputType } from "../../components/type.check";
+import { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+
 const Login = () => {
-    const handleClick = () => {
-        console.log('clicked')
-    }
-    const inputData = [{
-        name: "email",
-        type: "text",
-        placeholder: "Email",
-        icon: "/sms.svg"
-    },
-    {
-        name: "select",
-        type: "select",
-        placeholder: "",
-        icon: ""
-    },
+    const navigate = useNavigate()
+
+    const inputData = [
+        {
+            name: "email",
+            type: "text",
+            placeholder: "Email",
+            icon: "/sms.svg"
+        },
+        {
+            name: "password",
+            type: "text",
+            placeholder: "Password",
+            icon: "/lock.svg"
+        }
     ]
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm<any>({
+        resolver: yupResolver(loginSchema),
+    })
+
+    const {
+        isLoading,
+        mutate,
+    } = useMutation(["compliance"], login, {
+        onSuccess: async (data: any) => {
+            localStorage.setItem("token", data?.data.token)
+            setTimeout(() => {
+                navigate("/profile");
+            }, 500)
+        },
+    });
+
+
+    const onSubmit: SubmitHandler<IFormInput> = (data) => mutate(data)
     return (
-        <div className="LoginForm">
-            <div className="LoginMain">
-                <h3>Log in</h3>
-                {inputData.map((i) => (<Input {...i} />))}
-                <Button children="Log in" type="filled" handleClick={handleClick} />
-                <div className="DecisionDiv">
-                    <p className="DontHaveAccount">Don't have an account?  </p>
-                    <b className="SignUpDecision">Sign Up</b>
+        <div className="login">
+            <div className="login-contain">
+                <p>Log In</p>
+                <div className="login-input-wrap">
+                    {inputData.map((i) => (<Input {...i} register={register} errors={errors} />))}
+                    <Button style={{ marginTop: 15 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Login" />
                 </div>
+                <span>Don’t have an account?
+                    <h6 onClick={() => navigate("/signup")}>Sign Up</h6>
+                </span>
             </div>
         </div>
     )
