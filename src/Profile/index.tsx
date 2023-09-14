@@ -38,14 +38,21 @@ const Profile = () => {
                     const url = canvas.toDataURL("image/png");
                     downloadLink.href = url;
                     downloadLink.download = `${data?.data?.data.fullName}.png`;
-                    downloadLink.style.display = 'block';
-                    setImg(url)
+                    downloadLink.style.display = 'none';
+                    downloadLink.click();
                 })
                 .catch(function (error) {
                     console.error('Error generating image:', error);
                 });
         }
     };
+
+    const back = () => {
+        const downloadLink = downloadLinkRef.current;
+        if (downloadLink) {
+            downloadLink.style.display = 'block';
+        }
+    }
 
     useEffect(() => {
         console.log(isFetching);
@@ -57,10 +64,9 @@ const Profile = () => {
             {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
             {img && <img className="preview-download" src={img} />}
             <div className="profile-button-wrap">
-                {!img && <Button handleClick={handleDownloadClick} children="Generate" type="filled" />}
-                {!img && <Button handleClick={handleDownloadClick} children="Edit" type="out-line" />}
+                <Button handleClick={handleDownloadClick} children="Download" type="filled" />
+                <Button handleClick={() => { }} children="Edit" type="out-line" />
                 <a ref={downloadLinkRef} style={{ display: 'none' }}><Button children="Download" type="filled" /></a>
-                {/* {img && <Button handleClick={() => setImg("")} children="Back" type="out-line" />} */}
             </div>
         </div>
 
