@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-
+import './login.css';
 const Login = () => {
     const navigate = useNavigate()
 
