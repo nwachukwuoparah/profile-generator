@@ -17,7 +17,7 @@ const Input = ({ type, inputType, placeholder, name, icon, register, errors }: i
                         {inputType === "password" && (!toggle ? <BsFillEyeSlashFill color="grey" fontSize={25} onClick={() => setToggle(!toggle)} /> :
                             <BsFillEyeFill fontSize={25} color="grey" onClick={() => setToggle(!toggle)} />)}
                     </div>
-                    <div style={{ lineHeight: 2, color: "red", fontSize: 14 }}>{errors?.[name]?.message}</div>
+                    <div style={{ lineHeight: 1.2, color: "red", fontSize: 14, marginTop:5}}>{errors?.[name]?.message}</div>
                 </>
             )
         case "select":
@@ -28,7 +28,7 @@ const Input = ({ type, inputType, placeholder, name, icon, register, errors }: i
                         <option value="Frontend Development">Frontend Development</option>
                         <option value="Backend Development">Backend Development</option>
                     </select>
-                    <div style={{ lineHeight: 0.3, color: "red", fontSize: 14 }}>{errors?.[name]?.message}</div>
+                    <div style={{ lineHeight: 2, color: "red", fontSize: 14 }}>{errors?.[name]?.message}</div>
                 </>
             )
         default:
