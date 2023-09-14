@@ -10,14 +10,12 @@ const Profile = () => {
     const captureRef = useRef<HTMLDivElement | null>(null);
     const downloadLinkRef = useRef<HTMLAnchorElement | null>(null);
     const [img, setImg] = useState<string>("")
-
     useEffect(() => {
         console.log(downloadLinkRef)
 
     }, [downloadLinkRef])
     const {
         data,
-        isFetching,
     } = useQuery(["getUser"], getUser, {
         enabled: !!localStorage.getItem("token"),
         refetchOnWindowFocus: false,
@@ -38,8 +36,8 @@ const Profile = () => {
                     const url = canvas.toDataURL("image/png");
                     downloadLink.href = url;
                     downloadLink.download = `${data?.data?.data.fullName}.png`;
-                    downloadLink.style.display = 'none';
-                    downloadLink.click();
+                    // downloadLink.click();
+                    setImg(url)
                 })
                 .catch(function (error) {
                     console.error('Error generating image:', error);
@@ -47,26 +45,17 @@ const Profile = () => {
         }
     };
 
-    const back = () => {
-        const downloadLink = downloadLinkRef.current;
-        if (downloadLink) {
-            downloadLink.style.display = 'block';
-        }
-    }
-
-    useEffect(() => {
-        console.log(isFetching);
-        console.log(data?.data?.data.fullName)
-    }, [isFetching])
 
     return (
         <div className="profile-container">
             {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
             {img && <img className="preview-download" src={img} />}
             <div className="profile-button-wrap">
-                <Button handleClick={handleDownloadClick} children="Download" type="filled" />
-                <Button handleClick={() => { }} children="Edit" type="out-line" />
-                <a ref={downloadLinkRef} style={{ display: 'none' }}><Button children="Download" type="filled" /></a>
+                <a ref={downloadLinkRef} style={{ display: img ? "block" : 'none' }}><Button children="Download" type="filled" /></a>
+                {img && <Button handleClick={() => {setImg("") }} children="Back" type="out-line" />}
+
+                {!img && <Button handleClick={handleDownloadClick} children="Generate" type="filled" />}
+                {!img && <Button handleClick={() => { }} children="Edit" type="out-line" />}
             </div>
         </div>
 
