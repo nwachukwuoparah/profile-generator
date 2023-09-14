@@ -49,7 +49,7 @@
   margin-top: 30px;
 }
 .image-contain img {
-  position: relative;
+  /* position: relative; */
   top: 20px;
   width: 100%;
 }

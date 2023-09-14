@@ -9,7 +9,7 @@ import instagram from "../../../public/instagram.svg"
 import twitter from "../../../public/twitter.svg"
 
 
-const Card: React.FC<cardType> = ({ captureRef }) => {
+const Card: React.FC<cardType> = ({ value, captureRef }) => {
 
 
     return (
@@ -21,11 +21,11 @@ const Card: React.FC<cardType> = ({ captureRef }) => {
             <div className="card-contain">
                 <img src={logoblack} alt="image" />
                 <div className="image-contain">
-                    <img src={image} alt="image" />
+                    <img src={value?.profilePicture} alt="image" />
                 </div>
-                <h3>Raymond Nkume</h3>
+                <h3>{value?.fullName}</h3>
                 <p>The Curve Africa Cohort 3</p>
-                <h5>Front-End Trainee</h5>
+                <h5>{value?.stack}</h5>
             </div>
             <div className="socials">
                 <span>

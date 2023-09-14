@@ -1,4 +1,4 @@
-.sign-up {
+.signup {
   width: 100vw;
   height: 121.5vh;
   background-color: #023047;
@@ -7,18 +7,34 @@
   justify-content: center;
 }
 
-.sign-up-contain {
+.signup-contain {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 34%;
-  height: 80vh;
   background-color: #ffffff;
   border-radius: 5px;
-  padding: 38px 0px 0px;
+  padding: 40px 0px 40px;
 }
-
-.sign-up-contain p {
+.signup-contain span {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  display: flex;
+  gap: 5px;
+  margin-top: 25px;
+  color: rgba(139, 139, 139, 1);
+}
+.signup-contain h6 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  display: flex;
+  gap: 5px;
+  color: rgba(2, 48, 71, 1);
+  cursor: pointer;
+}
+.signup-contain p {
   font-size: 24px;
   font-weight: 400;
   line-height: 30px;
@@ -26,9 +42,19 @@
 }
 
 .signup-image-contain {
-  width: 70px;
-  height: 70px;
   margin: 35px 0px 18px;
+  border-radius: 60%;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.signup-image-contain-error {
+  height: 80px;
+  margin: 35px 0px 18px;
+  border-radius: 60%;
+  cursor: pointer;
+  border: 1px solid red;
+  object-fit: contain;
 }
 
 .signup-image-contain img {
@@ -36,9 +62,9 @@
   height: 100%;
 }
 
-.sign-up-input-wrap {
+.signup-input-wrap {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   width: 75%;
 }

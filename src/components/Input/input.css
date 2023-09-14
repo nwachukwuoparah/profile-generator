@@ -8,14 +8,15 @@
   outline: none;
   border-radius: 5px;
 }
-.input-wrap option{
-    font-size: 12px;
-  }
+.input-wrap option {
+  font-size: 12px;
+}
 .input-image {
   width: 22px;
   height: 22px;
 }
 .input-field {
+  width: 100%;
   font-size: 12px;
   font-weight: 400;
   font-family: "Poppins";
