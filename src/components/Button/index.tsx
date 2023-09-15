@@ -17,7 +17,7 @@ const Button = ({ handleClick, children, type, style, isLoading, disabled }: but
             )
         case "out-line":
             return (
-                <button className="button-outline" onClick={handleClick}> {children}</button >
+                <button className="button-outline" style={style}  onClick={handleClick}> {children}</button >
             )
         default:
             return null

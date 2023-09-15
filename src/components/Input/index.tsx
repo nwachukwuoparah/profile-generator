@@ -3,7 +3,7 @@ import { inputType } from "../type.check"
 import './input.css'
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
-const Input = ({ type, inputType, placeholder, name, icon, register, errors }: inputType) => {
+const Input = ({ type, inputType, placeholder, name, icon, register, errors}: inputType) => {
 
     const [toggle, setToggle] = useState<boolean>(false)
 
@@ -23,7 +23,7 @@ const Input = ({ type, inputType, placeholder, name, icon, register, errors }: i
         case "select":
             return (
                 <>
-                    <select className="input-wrap" {...register(name)} style={{ border: errors?.[name] && "1px solid red" }}>
+                    <select className="input-wrap"  {...register(name)} style={{ border: errors?.[name] && "1px solid red" }}>
                         <option className="option" value="">Stack</option>
                         <option className="option" value="Front-end Trainee">Front-end Trainee</option>
                         <option className="option" value="Back-end Trainee">Back-end Trainee</option>

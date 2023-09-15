@@ -86,7 +86,7 @@ const Login = () => {
             <div className="login-contain">
                 <p>Log In</p>
                 <div className="login-input-wrap">
-                    {inputData.map((i) => (<Input {...i} register={register} errors={errors} />))}
+                    {inputData.map((i, index) => (<Input key={index} {...i} register={register} errors={errors} />))}
                     <Button disabled={!active ? true : isLoading} style={{ marginTop: 15, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Login" />
                 </div>
                 <span>Don’t have an account?

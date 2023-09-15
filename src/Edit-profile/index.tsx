@@ -1,44 +1,46 @@
+import "./edit-profile.css"
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
-import { IFormInput } from "../../components/type.check";
-import './signup.css'
+import Button from "../components/Button";
+import Input from "../components/Input";
+import { IFormInput } from "../components/type.check";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { signupSchema } from "../../components/schema";
-import { useMutation } from "@tanstack/react-query";
-import { signUp } from "../../components/Api/mutate";
-import Toste from "../../components/Toste/toste";
+import { editSchema } from "../components/schema";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { editProfile } from "../components/Api/mutate";
 import { useEffect, useState } from "react";
-const Signup = () => {
+const Edit_profile = ({ edit }: { edit: () => void }) => {
+    const queryClient = useQueryClient();
     const navigate = useNavigate()
     const [toste, setToste] = useState<boolean>(false)
     const [image, setImage] = useState<any>(null);
     const [active, setActive] = useState<boolean>(false)
     const { register, handleSubmit, formState: { errors }, watch } = useForm<any>(
         {
-            resolver: yupResolver(signupSchema)
+            resolver: yupResolver(editSchema),
         }
     )
 
     const {
         error,
-        data,
         isLoading,
         mutate,
-    } = useMutation(["compliance"], signUp, {
+    } = useMutation(["edit-profile"], editProfile, {
         onSuccess: async (data: any) => {
             setToste(true)
             setTimeout(() => {
                 navigate("/");
             }, 1000)
-
+            queryClient.invalidateQueries({ queryKey: ["getUser"] });
         },
         onError: (err: any) => {
             setToste(true)
             console.log(err?.response?.data?.message)
+            queryClient.invalidateQueries({ queryKey: ["getUser"] });
         }
     });
+
+
 
     const inputData = [
         {
@@ -46,21 +48,7 @@ const Signup = () => {
             type: "text",
             placeholder: "Fullname",
             inputType: "text",
-            icon: "/user.svg"
-        },
-        {
-            name: "email",
-            type: "text",
-            placeholder: "Email",
-            inputType: "text",
-            icon: "/sms.svg"
-        },
-        {
-            name: "password",
-            type: "text",
-            placeholder: "Password",
-            icon: "/lock.svg",
-            inputType: "password",
+            icon: "/user.svg",
         },
         {
             name: "stack",
@@ -82,7 +70,7 @@ const Signup = () => {
                 setToste(false)
         }, 3000)
 
-        if (watch("profilePicture") !== null && watch("profilePicture")[0] !== undefined) {
+        if (watch("profilePicture") !== null && watch("profilePicture")?.[0] !== undefined) {
             const blob = new Blob([watch("profilePicture")?.[0]], { type: "image/jpeg" });
             const url = URL.createObjectURL(blob);
             setImage(url);
@@ -93,8 +81,6 @@ const Signup = () => {
         if (
             image &&
             watch("fullName")
-            && watch("email")
-            && watch("password")
             && watch("stack")) {
             setActive(true)
         } else {
@@ -103,21 +89,20 @@ const Signup = () => {
     }, [
         image,
         watch("fullName"),
-        , watch("email")
-        , watch("password")
         , watch("stack")
     ])
 
     return (
-        <div className="signup">
-            <img src="/ThecurveLogo.svg" className="logo" />
-            <Toste suscess={data?.data?.message} error={error?.response?.data?.message} toste={toste} top="55px" />
-            <div className="signup-contain">
+        <div className="edit-profile">
+            <div className="edit-profile-contain" >
                 <p>Sign Up</p>
                 <label>
-                    <div className={errors?.["profilePicture"] ? "signup-image-contain-error" : "signup-image-contain "}>
+                    <div className={errors?.["profilePicture"] ? "edit-profile-image-contain-error" : "edit-profile-image-contain"}>
                         <input hidden type="file" {...register("profilePicture")} />
-                        {image ? <img src={image} style={{ position: "relative", top: 8, width: "100%", objectFit: "contain" }} /> : <img src="/userbold.svg" style={{ width: "100%", objectFit: "contain" }} />}
+                        {image ? <img src={image} style={{ position: "relative", top: 8, width: "100%", objectFit: "contain" }} />
+                            :
+                            <img src={"/userbold.svg"} style={{ width: "100%", objectFit: "contain" }} />
+                        }
                     </div>
                     <img src="/camera.svg" style={{ position: "relative", top: -45, left: 65, cursor: "pointer" }} />
                 </label>
@@ -131,16 +116,14 @@ const Signup = () => {
                     }}
                 >{`${errors?.["profilePicture"]?.message}`}</span>}
 
-                <div className="signup-input-wrap">
-                    {inputData.map((i, index) => (<Input key={index} {...i} register={register} errors={errors} />))}
+                <div className="edit-profile-input-wrap">
+                    {inputData.map((i,index) => (<Input key={index} {...i} register={register} errors={errors} />))}
                     <Button disabled={!active ? true : isLoading} style={{ marginTop: 15, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
+                    <Button disabled={!active ? true : isLoading} style={{ border: "1.5px solid #023047", color: "#023047", fontWeight:500, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={edit} type="out-line" children="Back" />
                 </div>
-                <span>Already have an account?
-                    <h6 onClick={() => navigate("/")}>Login</h6>
-                </span>
             </div>
         </div>
     )
 };
 
-export default Signup;
+export default Edit_profile;

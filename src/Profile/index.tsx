@@ -1,19 +1,18 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import "./profile.css"
 import html2canvas from 'html2canvas';
 import Card from "../components/Card";
 import Button from "../components/Button";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../components/Api/query";
+import Edit_profile from "../Edit-profile";
 
 const Profile = () => {
     const captureRef = useRef<HTMLDivElement | null>(null);
     const downloadLinkRef = useRef<HTMLAnchorElement | null>(null);
     const [img, setImg] = useState<string>("")
-    useEffect(() => {
-        console.log(downloadLinkRef)
+    const [toggle, setToggle] = useState<boolean>(false)
 
-    }, [downloadLinkRef])
     const {
         data,
     } = useQuery(["getUser"], getUser, {
@@ -36,7 +35,6 @@ const Profile = () => {
                     const url = canvas.toDataURL("image/png");
                     downloadLink.href = url;
                     downloadLink.download = `${data?.data?.data.fullName}.png`;
-                    // downloadLink.click();
                     setImg(url)
                 })
                 .catch(function (error) {
@@ -44,24 +42,25 @@ const Profile = () => {
                 });
         }
     };
-
+    const edit = (): void => setToggle(!toggle)
 
     return (
-        <div className="profile-container">
-            <img src="/ThecurveLogo.svg" className="logo" />
-            {/* <div style={{ width: "100vw" }}> */}
+        <>
+            {toggle && <Edit_profile edit={edit} />}
+            <div className="profile-container">
+                <img src="/ThecurveLogo.svg" className="logo" />
+                <div className="profile-button-wrap">
+                    {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
+                    {img && <img className="preview-download" src={img} />}
+                    <a ref={downloadLinkRef} style={{ display: img ? "block" : 'none' }}><Button children="Download" type="filled" /></a>
+                    {img && <Button handleClick={() => { setImg("") }} children="Back" type="out-line" />}
 
-            <div className="profile-button-wrap">
-                {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
-                {img && <img className="preview-download" src={img} />}
-                <a ref={downloadLinkRef} style={{ display: img ? "block" : 'none' }}><Button children="Download" type="filled" /></a>
-                {img && <Button handleClick={() => { setImg("") }} children="Back" type="out-line" />}
-
-                {!img && <Button handleClick={handleDownloadClick} children="Generate" type="filled" />}
-                {!img && <Button handleClick={() => { }} children="Edit" type="out-line" />}
+                    {!img && <Button handleClick={handleDownloadClick} children="Generate" type="filled" />}
+                    {!img && <Button handleClick={edit} children="Edit" type="out-line" />}
+                </div>
             </div>
-            {/* </div> */}
-        </div>
+        </>
+
 
     )
 };

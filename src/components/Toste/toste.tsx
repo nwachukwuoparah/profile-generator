@@ -2,8 +2,6 @@ import "./toste.css"
 
 const Toste = ({ suscess, error, toste, top }: { suscess?: string, error?: string, toste: boolean, top: string }) => {
 
-  console.log(toste);
-
   return (
     <div
       style={{
