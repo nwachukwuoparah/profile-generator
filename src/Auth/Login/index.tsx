@@ -70,13 +70,13 @@ const Login = () => {
     const onSubmit: SubmitHandler<IFormInput> = (data) => mutate(data)
     return (
         <div className="login">
-             <img src="/ThecurveLogo.svg" className="logo" />
-            <Toste suscess={data?.data.message} error={error?.response?.data?.message} toste={toste} top="155px" />
+            <img src="/ThecurveLogo.svg" className="logo" />
+            <Toste suscess={data?.data.message} error={error?.response?.data?.message} toste={toste} top="150px" />
             <div className="login-contain">
                 <p>Log In</p>
                 <div className="login-input-wrap">
                     {inputData.map((i) => (<Input {...i} register={register} errors={errors} />))}
-                    <Button style={{ marginTop: 15 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Login" />
+                    <Button disabled={isLoading} style={{ marginTop: 15, opacity: isLoading && 0.5 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Login" />
                 </div>
                 <span>Don’t have an account?
                     <h6 onClick={() => navigate("/signup")}>Sign Up</h6>

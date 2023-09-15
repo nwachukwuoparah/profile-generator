@@ -13,7 +13,8 @@ import { useEffect, useState } from "react";
 const Signup = () => {
     const navigate = useNavigate()
     const [toste, setToste] = useState<boolean>(false)
-    const { register, handleSubmit, formState: { errors } } = useForm<any>(
+    const [image, setImage] = useState<any>(null);
+    const { register, handleSubmit, formState: { errors }, watch } = useForm<any>(
         {
             resolver: yupResolver(signupSchema)
         }
@@ -69,29 +70,44 @@ const Signup = () => {
             inputType: "text",
         },
     ]
+
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         const { profilePicture, ...others } = data
         console.log({ ...others, profilePicture: profilePicture?.[0] })
         mutate({ ...others, profilePicture: profilePicture?.[0] })
     }
+
     useEffect(() => {
         setTimeout(() => {
             if (toste === true)
                 setToste(false)
         }, 3000)
-    }, [error])
+
+        if (watch("profilePicture") !== null && watch("profilePicture")[0] !== undefined) {
+            const blob = new Blob([watch("profilePicture")?.[0]], { type: "image/jpeg" });
+            const url = URL.createObjectURL(blob);
+            console.log("call");
+            setImage(url);
+            console.log("add")
+        }
+    }, [error, watch("profilePicture")])
+
+    useEffect(() => {
+        console.log(image)
+    }, [image])
 
     return (
         <div className="signup">
-             <img src="/ThecurveLogo.svg" className="logo" />
-            <Toste suscess={data?.data?.message} error={error?.response?.data?.message} toste={toste} top="140px" />
+            <img src="/ThecurveLogo.svg" className="logo" />
+            <Toste suscess={data?.data?.message} error={error?.response?.data?.message} toste={toste} top="55px" />
             <div className="signup-contain">
                 <p>Sign Up</p>
                 <label>
-                    <div className={errors?.["image"] ? "signup-image-contain-error" : "signup-image-contain "}>
+                    <div className={errors?.["profilePicture"] ? "signup-image-contain-error" : "signup-image-contain "}>
                         <input hidden type="file" {...register("profilePicture")} />
-                        <img src="/userbold.svg" />
+                        {image ? <img src={image} style={{ position: "relative", top: 8, width: "100%", objectFit: "contain" }} /> : <img src="/userbold.svg" style={{ width: "100%", objectFit: "contain" }} />}
                     </div>
+                    <img src="/camera.svg" style={{ position: "relative", top: -45, left: 65, cursor: "pointer" }} />
                 </label>
                 {errors?.["profilePicture"] && <span
                     style={{
@@ -105,7 +121,7 @@ const Signup = () => {
 
                 <div className="signup-input-wrap">
                     {inputData.map((i) => (<Input {...i} register={register} errors={errors} />))}
-                    <Button style={{ marginTop: 15 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
+                    <Button disabled={isLoading} style={{ marginTop: 15, opacity: isLoading && 0.5 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
                 </div>
                 <span>Already have an account?
                     <h6 onClick={() => navigate("/")}>Login</h6>
