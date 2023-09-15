@@ -8,22 +8,37 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { signupSchema } from "../../components/schema";
 import { useMutation } from "@tanstack/react-query";
 import { signUp } from "../../components/Api/mutate";
+import Toste from "../../components/Toste/toste";
+import { useEffect, useState } from "react";
 const Signup = () => {
     const navigate = useNavigate()
-
-    const { register, handleSubmit, formState: { errors } } = useForm<any>(
+    const [toste, setToste] = useState<boolean>(false)
+    const [image, setImage] = useState<any>(null);
+    const [active, setActive] = useState<boolean>(false)
+    const { register, handleSubmit, formState: { errors }, watch } = useForm<any>(
         {
             resolver: yupResolver(signupSchema)
         }
     )
 
     const {
+        error,
+        data,
         isLoading,
         mutate,
     } = useMutation(["compliance"], signUp, {
-        onSuccess: async () => {
-            navigate("/");
+        onSuccess: async (data: any) => {
+            console.log(data)
+            setToste(true)
+            setTimeout(() => {
+                navigate("/");
+            }, 1000)
+
         },
+        onError: (err: any) => {
+            setToste(true)
+            console.log(err?.response?.data?.message)
+        }
     });
 
     const inputData = [
@@ -31,43 +46,84 @@ const Signup = () => {
             name: "fullName",
             type: "text",
             placeholder: "Fullname",
+            inputType: "text",
             icon: "/user.svg"
         },
         {
             name: "email",
             type: "text",
             placeholder: "Email",
+            inputType: "text",
             icon: "/sms.svg"
         },
         {
             name: "password",
             type: "text",
             placeholder: "Password",
-            icon: "/lock.svg"
+            icon: "/lock.svg",
+            inputType: "password",
         },
         {
             name: "stack",
             type: "select",
             placeholder: "",
-            icon: ""
+            icon: "",
+            inputType: "text",
         },
     ]
+
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         const { profilePicture, ...others } = data
         console.log({ ...others, profilePicture: profilePicture?.[0] })
         mutate({ ...others, profilePicture: profilePicture?.[0] })
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            if (toste === true)
+                setToste(false)
+        }, 3000)
+
+        if (watch("profilePicture") !== null && watch("profilePicture")[0] !== undefined) {
+            const blob = new Blob([watch("profilePicture")?.[0]], { type: "image/jpeg" });
+            const url = URL.createObjectURL(blob);
+            console.log("call");
+            setImage(url);
+            console.log("add")
+        }
+    }, [error, watch("profilePicture")])
+
+    useEffect(() => {
+        if (
+            image &&
+            watch("fullName")
+            && watch("email")
+            && watch("password")
+            && watch("stack")) {
+            setActive(true)
+        } else {
+            setActive(false)
+        }
+    }, [
+        image,
+        watch("fullName"),
+        , watch("email")
+        , watch("password")
+        , watch("stack")
+    ])
 
     return (
         <div className="signup">
+            <img src="/ThecurveLogo.svg" className="logo" />
+            <Toste suscess={data?.data?.message} error={error?.response?.data?.message} toste={toste} top="55px" />
             <div className="signup-contain">
                 <p>Sign Up</p>
                 <label>
-                    <div className={errors?.["image"] ? "signup-image-contain-error" : "signup-image-contain "}>
+                    <div className={errors?.["profilePicture"] ? "signup-image-contain-error" : "signup-image-contain "}>
                         <input hidden type="file" {...register("profilePicture")} />
-                        <img src="/userbold.svg" />
+                        {image ? <img src={image} style={{ position: "relative", top: 8, width: "100%", objectFit: "contain" }} /> : <img src="/userbold.svg" style={{ width: "100%", objectFit: "contain" }} />}
                     </div>
+                    <img src="/camera.svg" style={{ position: "relative", top: -45, left: 65, cursor: "pointer" }} />
                 </label>
                 {errors?.["profilePicture"] && <span
                     style={{
@@ -79,8 +135,8 @@ const Signup = () => {
                     }}
                 >{`${errors?.["profilePicture"]?.message}`}</span>}
                 <div className="signup-input-wrap">
-                    {inputData.map((i) => (<Input errors={errors} {...i} register={register} />))}
-                    <Button style={{ marginTop: 15 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
+                    {inputData.map((i) => (<Input {...i} register={register} errors={errors} />))}
+                    <Button disabled={!active ? true : isLoading} style={{ marginTop: 15, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
                 </div>
                 <span>Already have an account?
                     <h6 onClick={() => navigate("/")}>Login</h6>

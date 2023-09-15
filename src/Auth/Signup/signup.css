@@ -1,10 +1,10 @@
 .signup {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #023047;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 50px 0px;
 }
 
 .signup-contain {
@@ -14,7 +14,9 @@
   width: 34%;
   background-color: #ffffff;
   border-radius: 5px;
-  padding: 40px 0px 40px;
+  padding: 60px 0px;
+  font-family: "Roboto", sans-serif;
+  margin: 0px auto;
 }
 .signup-contain span {
   font-size: 14px;
@@ -24,6 +26,7 @@
   gap: 5px;
   margin-top: 25px;
   color: rgba(139, 139, 139, 1);
+  font-family: "Roboto", sans-serif;
 }
 .signup-contain h6 {
   font-size: 14px;
@@ -42,19 +45,31 @@
 }
 
 .signup-image-contain {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 35px 0px 18px;
   border-radius: 60%;
   cursor: pointer;
   object-fit: contain;
+  border: 1px solid rgb(185, 181, 181);
+  overflow: hidden;
 }
 
 .signup-image-contain-error {
-  height: 80px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 35px 0px 18px;
   border-radius: 60%;
   cursor: pointer;
   border: 1px solid red;
   object-fit: contain;
+  overflow: hidden;
 }
 
 .signup-image-contain img {
@@ -67,4 +82,15 @@
   flex-direction: column;
   gap: 5px;
   width: 75%;
+}
+
+@media screen and (max-width: 425px) {
+  .signup-contain {
+    width: 95%;
+    margin-top: 10vh;
+  }
+
+  .signup-input-wrap {
+    width: 85%;
+  }
 }

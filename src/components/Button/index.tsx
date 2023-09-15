@@ -2,11 +2,12 @@
 import "./button.css"
 import { buttonType } from "../type.check";
 
-const Button = ({ handleClick, children, type, style, isLoading }: buttonType) => {
+
+const Button = ({ handleClick, children, type, style, isLoading, disabled }: buttonType) => {
     switch (type) {
         case "filled":
             return (
-                <button style={style} className="button" onClick={handleClick}>
+                <button disabled={disabled} style={style} className="button" onClick={handleClick}>
                     {isLoading ?
                         <div className="loader-wrap">
                             <div className="loader"></div>

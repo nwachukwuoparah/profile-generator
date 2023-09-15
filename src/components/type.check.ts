@@ -24,6 +24,7 @@ export interface inputType {
     name: any
     register: UseFormRegister<any>
     errors: any
+    inputType: string
 }
 
 export interface buttonType {
@@ -32,4 +33,5 @@ export interface buttonType {
     type: string;
     style?: any;
     isLoading?: boolean
+    disabled?: boolean
 }

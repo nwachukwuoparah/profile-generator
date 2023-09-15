@@ -10,17 +10,33 @@ const Profile = () => {
     const captureRef = useRef<HTMLDivElement | null>(null);
     const downloadLinkRef = useRef<HTMLAnchorElement | null>(null);
     const [img, setImg] = useState<string>("")
+    useEffect(() => {
+        console.log(downloadLinkRef)
 
+    }, [downloadLinkRef])
+    const {
+        data,
+    } = useQuery(["getUser"], getUser, {
+        enabled: !!localStorage.getItem("token"),
+        refetchOnWindowFocus: false,
+        onError: (error) => {
+            console.log(error);
+        },
+    });
 
     const handleDownloadClick = () => {
+        const html2canvasOptions = {
+            allowTaint: true,
+            useCORS: true,
+        };
         const downloadLink = downloadLinkRef.current;
         if (captureRef.current && downloadLink) {
-            html2canvas(captureRef.current)
+            html2canvas(captureRef.current, html2canvasOptions)
                 .then(function (canvas) {
                     const url = canvas.toDataURL("image/png");
                     downloadLink.href = url;
-                    downloadLink.download = 'profile.png';
-                    downloadLink.style.display = 'block';
+                    downloadLink.download = `${data?.data?.data.fullName}.png`;
+                    // downloadLink.click();
                     setImg(url)
                 })
                 .catch(function (error) {
@@ -30,39 +46,21 @@ const Profile = () => {
     };
 
 
-    useEffect(() => {
-        console.log(downloadLinkRef)
-
-    }, [downloadLinkRef])
-    const {
-        data,
-        isFetching,
-    } = useQuery(["getUser"], getUser, {
-        enabled: !!localStorage.getItem("token"),
-        refetchOnWindowFocus: false,
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-    useEffect(() => {
-        console.log(isFetching);
-        console.log(data?.data?.data)
-    }, [isFetching])
-
     return (
         <div className="profile-container">
-            {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
-            {img && <img style={{
-                width: "38.1%",
-                height: 523,
-                marginTop: 80
-            }} src={img} />}
+            <img src="/ThecurveLogo.svg" className="logo" />
+            {/* <div style={{ width: "100vw" }}> */}
+
             <div className="profile-button-wrap">
+                {!img && <Card value={data?.data?.data} captureRef={captureRef} />}
+                {img && <img className="preview-download" src={img} />}
+                <a ref={downloadLinkRef} style={{ display: img ? "block" : 'none' }}><Button children="Download" type="filled" /></a>
+                {img && <Button handleClick={() => { setImg("") }} children="Back" type="out-line" />}
+
                 {!img && <Button handleClick={handleDownloadClick} children="Generate" type="filled" />}
-                {!img && <Button handleClick={handleDownloadClick} children="Edit" type="out-line" />}
-                <a ref={downloadLinkRef} style={{ display: 'none' }}><Button children="Download" type="filled" /></a>
-                {/* {img && <Button handleClick={() => setImg("")} children="Back" type="out-line" />} */}
+                {!img && <Button handleClick={() => { }} children="Edit" type="out-line" />}
             </div>
+            {/* </div> */}
         </div>
 
     )
