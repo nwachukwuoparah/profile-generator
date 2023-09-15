@@ -1,5 +1,5 @@
 import "./edit-profile.css"
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { IFormInput } from "../components/type.check";
@@ -11,7 +11,7 @@ import { editProfile } from "../components/Api/mutate";
 import { useEffect, useState } from "react";
 const Edit_profile = ({ edit, value }: { edit: () => void, value: any }) => {
     const queryClient = useQueryClient();
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [toste, setToste] = useState<boolean>(false)
     const [image, setImage] = useState<any>(null);
     const [active, setActive] = useState<boolean>(false)
