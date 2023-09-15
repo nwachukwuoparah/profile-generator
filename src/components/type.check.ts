@@ -33,5 +33,5 @@ export interface buttonType {
     type: string;
     style?: any;
     isLoading?: boolean
-    disabled: boolean
+    disabled?: boolean
 }
