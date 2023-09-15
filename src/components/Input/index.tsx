@@ -17,16 +17,16 @@ const Input = ({ type, inputType, placeholder, name, icon, register, errors }: i
                         {inputType === "password" && (!toggle ? <BsFillEyeSlashFill color="grey" fontSize={25} onClick={() => setToggle(!toggle)} /> :
                             <BsFillEyeFill fontSize={25} color="grey" onClick={() => setToggle(!toggle)} />)}
                     </div>
-                    <div style={{ lineHeight: 1.2, color: "red", fontSize: 14, marginTop:5}}>{errors?.[name]?.message}</div>
+                    <div style={{ lineHeight: 1.2, color: "red", fontSize: 14, marginTop: 5 }}>{errors?.[name]?.message}</div>
                 </>
             )
         case "select":
             return (
                 <>
                     <select className="input-wrap" {...register(name)} style={{ border: errors?.[name] && "1px solid red" }}>
-                        <option value="">Stack</option>
-                        <option value="Frontend Development">Front-end Trainee</option>
-                        <option value="Backend Development">Back-end Trainee</option>
+                        <option className="option" value="">Stack</option>
+                        <option className="option" value="Front-end Trainee">Front-end Trainee</option>
+                        <option className="option" value="Back-end Trainee">Back-end Trainee</option>
                     </select>
                     <div style={{ lineHeight: 2, color: "red", fontSize: 14 }}>{errors?.[name]?.message}</div>
                 </>

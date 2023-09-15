@@ -7,9 +7,14 @@
   padding: 0px 15px;
   outline: none;
   border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: rgb(50, 49, 49);
 }
-.input-wrap option {
-  font-size: 12px;
+.option {
+  font-size: 52px;
+
+  color: red;
 }
 .input-image {
   width: 22px;
@@ -17,9 +22,9 @@
 }
 .input-field {
   width: 100%;
-  font-size: 14px;
-  font-weight: 900;
-  font-family: "Poppins";
+  font-weight: 400;
+  /* font-family: "Roboto", sans-serif; */
+  color: rgb(50, 49, 49);
   padding: 10px;
   outline: none;
   border: none;

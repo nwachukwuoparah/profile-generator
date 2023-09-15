@@ -14,6 +14,7 @@ const Signup = () => {
     const navigate = useNavigate()
     const [toste, setToste] = useState<boolean>(false)
     const [image, setImage] = useState<any>(null);
+    const [active, setActive] = useState<boolean>(false)
     const { register, handleSubmit, formState: { errors }, watch } = useForm<any>(
         {
             resolver: yupResolver(signupSchema)
@@ -93,8 +94,23 @@ const Signup = () => {
     }, [error, watch("profilePicture")])
 
     useEffect(() => {
-        console.log(image)
-    }, [image])
+        if (
+            image &&
+            watch("fullName")
+            && watch("email")
+            && watch("password")
+            && watch("stack")) {
+            setActive(true)
+        } else {
+            setActive(false)
+        }
+    }, [
+        image,
+        watch("fullName"),
+        , watch("email")
+        , watch("password")
+        , watch("stack")
+    ])
 
     return (
         <div className="signup">
@@ -121,7 +137,7 @@ const Signup = () => {
 
                 <div className="signup-input-wrap">
                     {inputData.map((i) => (<Input {...i} register={register} errors={errors} />))}
-                    <Button disabled={isLoading} style={{ marginTop: 15, opacity: isLoading && 0.5 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
+                    <Button disabled={!active ? true : isLoading} style={{ marginTop: 15, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
                 </div>
                 <span>Already have an account?
                     <h6 onClick={() => navigate("/")}>Login</h6>

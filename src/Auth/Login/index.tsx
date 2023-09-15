@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 const Login = () => {
     const navigate = useNavigate()
     const [toste, setToste] = useState<boolean>(false)
+    const [active, setActive] = useState<boolean>(false)
     const inputData = [
         {
             name: "email",
@@ -35,6 +36,7 @@ const Login = () => {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors }
     } = useForm<any>({
         resolver: yupResolver(loginSchema),
@@ -66,6 +68,15 @@ const Login = () => {
         }, 3000)
     }, [error])
 
+    useEffect(() => {
+        if (watch("email")
+            && watch("password")
+        ) {
+            setActive(true)
+        } else {
+            setActive(false)
+        }
+    }, [watch("email"), watch("password")])
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => mutate(data)
     return (
@@ -76,7 +87,7 @@ const Login = () => {
                 <p>Log In</p>
                 <div className="login-input-wrap">
                     {inputData.map((i) => (<Input {...i} register={register} errors={errors} />))}
-                    <Button disabled={isLoading} style={{ marginTop: 15, opacity: isLoading && 0.5 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Login" />
+                    <Button disabled={!active ? true : isLoading} style={{ marginTop: 15, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Login" />
                 </div>
                 <span>Don’t have an account?
                     <h6 onClick={() => navigate("/signup")}>Sign Up</h6>
