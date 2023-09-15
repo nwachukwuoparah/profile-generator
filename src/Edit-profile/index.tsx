@@ -9,7 +9,7 @@ import { editSchema } from "../components/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { editProfile } from "../components/Api/mutate";
 import { useEffect, useState } from "react";
-const Edit_profile = ({ edit, value }: { edit: () => void, value: any }) => {
+const Edit_profile = ({ edit }: { edit: () => void }) => {
     const queryClient = useQueryClient();
     // const navigate = useNavigate()
     const [toste, setToste] = useState<boolean>(false)
@@ -29,7 +29,7 @@ const Edit_profile = ({ edit, value }: { edit: () => void, value: any }) => {
         onSuccess: async (data: any) => {
             if (data)
                 // setToste(true)
-            queryClient.invalidateQueries({ queryKey: ["getUser"] });
+                queryClient.invalidateQueries({ queryKey: ["getUser"] });
             edit()
         },
         onError: (err: any) => {
@@ -59,7 +59,7 @@ const Edit_profile = ({ edit, value }: { edit: () => void, value: any }) => {
     ]
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         const { profilePicture, ...others } = data
-        mutate({ ...others, profilePicture: profilePicture?.[0], email: value?.email })
+        mutate({ ...others, profilePicture: profilePicture?.[0] })
     }
 
     useEffect(() => {

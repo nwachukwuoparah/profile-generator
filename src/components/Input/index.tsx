@@ -24,7 +24,7 @@ const Input = ({ type, inputType, placeholder, name, icon, register, errors}: in
             return (
                 <>
                     <select className="input-wrap"  {...register(name)} style={{ border: errors?.[name] && "1px solid red" }}>
-                        <option className="option" value="">Stack</option>
+                        <option className="option" value="">Plaese select a stack</option>
                         <option className="option" value="Front-end Trainee">Front-end Trainee</option>
                         <option className="option" value="Back-end Trainee">Back-end Trainee</option>
                     </select>
