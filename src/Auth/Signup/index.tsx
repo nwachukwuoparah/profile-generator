@@ -78,7 +78,6 @@ const Signup = () => {
                         textAlign: "center"
                     }}
                 >{`${errors?.["profilePicture"]?.message}`}</span>}
-
                 <div className="signup-input-wrap">
                     {inputData.map((i) => (<Input errors={errors} {...i} register={register} />))}
                     <Button style={{ marginTop: 15 }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
