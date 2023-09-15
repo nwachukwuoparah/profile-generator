@@ -9,7 +9,7 @@ import { editSchema } from "../components/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { editProfile } from "../components/Api/mutate";
 import { useEffect, useState } from "react";
-const Edit_profile = ({ edit }: { edit: () => void }) => {
+const Edit_profile = ({ edit, value }: { edit: () => void, value: any }) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate()
     const [toste, setToste] = useState<boolean>(false)
@@ -28,11 +28,9 @@ const Edit_profile = ({ edit }: { edit: () => void }) => {
     } = useMutation(["edit-profile"], editProfile, {
         onSuccess: async (data: any) => {
             if (data)
-                setToste(true)
-            setTimeout(() => {
-                navigate("/");
-            }, 1000)
+                // setToste(true)
             queryClient.invalidateQueries({ queryKey: ["getUser"] });
+            edit()
         },
         onError: (err: any) => {
             setToste(true)
@@ -59,10 +57,9 @@ const Edit_profile = ({ edit }: { edit: () => void }) => {
             inputType: "text",
         },
     ]
-
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         const { profilePicture, ...others } = data
-        mutate({ ...others, profilePicture: profilePicture?.[0] })
+        mutate({ ...others, profilePicture: profilePicture?.[0], email: value?.email })
     }
 
     useEffect(() => {
@@ -119,7 +116,7 @@ const Edit_profile = ({ edit }: { edit: () => void }) => {
 
                 <div className="edit-profile-input-wrap">
                     {inputData.map((i, index) => (<Input key={index} {...i} register={register} errors={errors} />))}
-                    <Button disabled={!active ? true : isLoading} style={{ marginTop: 15, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
+                    <Button disabled={!active ? true : isLoading} style={{ marginTop: 15, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Save" />
                     <Button disabled={!active ? true : isLoading} style={{ border: "1.5px solid #023047", color: "#023047", fontWeight: 500, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={edit} type="out-line" children="Back" />
                 </div>
             </div>

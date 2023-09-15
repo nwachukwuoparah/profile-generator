@@ -18,6 +18,9 @@ const Profile = () => {
     } = useQuery(["getUser"], getUser, {
         enabled: !!localStorage.getItem("token"),
         refetchOnWindowFocus: false,
+        onSuccess: (data) => {
+            console.log(data)
+        },
         onError: (error) => {
             console.log(error);
         },
@@ -46,7 +49,7 @@ const Profile = () => {
 
     return (
         <>
-            {toggle && <Edit_profile edit={edit} />}
+            {toggle && <Edit_profile edit={edit} value={data?.data?.data} />}
             <div className="profile-container">
                 <img src="/ThecurveLogo.svg" className="logo" />
                 <div className="profile-button-wrap">
