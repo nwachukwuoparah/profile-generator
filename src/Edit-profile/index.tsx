@@ -27,7 +27,8 @@ const Edit_profile = ({ edit }: { edit: () => void }) => {
         mutate,
     } = useMutation(["edit-profile"], editProfile, {
         onSuccess: async (data: any) => {
-            setToste(true)
+            if (data)
+                setToste(true)
             setTimeout(() => {
                 navigate("/");
             }, 1000)
@@ -117,9 +118,9 @@ const Edit_profile = ({ edit }: { edit: () => void }) => {
                 >{`${errors?.["profilePicture"]?.message}`}</span>}
 
                 <div className="edit-profile-input-wrap">
-                    {inputData.map((i,index) => (<Input key={index} {...i} register={register} errors={errors} />))}
+                    {inputData.map((i, index) => (<Input key={index} {...i} register={register} errors={errors} />))}
                     <Button disabled={!active ? true : isLoading} style={{ marginTop: 15, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={handleSubmit(onSubmit)} type="filled" children="Create my account" />
-                    <Button disabled={!active ? true : isLoading} style={{ border: "1.5px solid #023047", color: "#023047", fontWeight:500, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={edit} type="out-line" children="Back" />
+                    <Button disabled={!active ? true : isLoading} style={{ border: "1.5px solid #023047", color: "#023047", fontWeight: 500, opacity: !active ? 0.6 : (isLoading && 0.6) }} isLoading={isLoading} handleClick={edit} type="out-line" children="Back" />
                 </div>
             </div>
         </div>
