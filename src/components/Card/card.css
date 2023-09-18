@@ -56,7 +56,8 @@ h3 {
 p {
   font-size: 16px;
   font-weight: 500;
-  color: rgba(68, 68, 68, 1);
+  color: #8B8B8B;;
+  
 }
 h5 {
   font-size: 14px;
@@ -65,24 +66,18 @@ h5 {
 }
 
 .socials {
-  /* position: relative;
-  top: 30px;
-  left: 20px; */
   margin-left: 20px;
   margin-top: 30px;
-  /* background-color: red; */
   width: 60%;
 }
 .socials span {
   display: flex;
   align-items: center;
   gap: 9px;
-
 }
 
 .socials p {
   line-height: 30px;
-  color: #8B8B8B;
 }
 
 @media screen and (max-width: 425px) {
