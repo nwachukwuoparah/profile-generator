@@ -45,7 +45,7 @@ const Signup = () => {
         {
             name: "fullName",
             type: "text",
-            placeholder: "Fullname",
+            placeholder: "Full Name",
             inputType: "text",
             icon: "/user.svg"
         },
