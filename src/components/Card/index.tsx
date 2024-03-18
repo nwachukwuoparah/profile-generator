@@ -1,11 +1,11 @@
 import { cardType } from "../type.check";
 import "./card.css"
 import React from "react"
-import logoblack from "../../../public/Logo.svg"
-import facebook from "../../../public/facebook.svg"
-import linkdin from "../../../public/linkedin.svg"
-import instagram from "../../../public/instagram.svg"
-import twitter from "../../../public/twitter.svg"
+import logoblack from "/Logo.svg"
+import facebook from "/facebook.svg"
+import linkdin from "/linkedin.svg"
+import instagram from "/instagram.svg"
+import twitter from "/twitter.svg"
 
 
 const Card: React.FC<cardType> = ({ value, captureRef }) => {
@@ -23,7 +23,7 @@ const Card: React.FC<cardType> = ({ value, captureRef }) => {
                     <img src={value?.profilePicture} alt="image" />
                 </div>
                 <h3>{value?.fullName}</h3>
-                <p>The Curve Africa Cohort 3</p>
+                <p>The Curve Africa Cohort 4</p>
                 <h5>{value?.stack}</h5>
             </div>
             <div className="socials">
