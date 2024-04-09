@@ -45,6 +45,7 @@ const Profile = () => {
                 });
         }
     };
+
     const edit = (): void => setToggle(!toggle)
 
     return (

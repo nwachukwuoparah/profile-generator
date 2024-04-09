@@ -2,7 +2,7 @@ const { VITE_End_Point } = import.meta.env;
 import axios from "axios";
 
 export const signUp = (data: any): any => {
-    return axios.post(`${VITE_End_Point}/signup`, data,
+    return axios.post(`${VITE_End_Point}/signups`, data,
         {
             headers: {
                 "Content-Type": "multipart/form-data",
