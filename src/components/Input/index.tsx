@@ -28,6 +28,7 @@ const Input = ({ type, inputType, placeholder, name, icon, register, errors }: i
                             <option className="option" value="">Select Stack</option>
                             <option className="option" value="Front-end Trainee">Front-end Trainee</option>
                             <option className="option" value="Back-end Trainee">Back-end Trainee</option>
+                            <option className="option" value="Product design Trainee">Product design Trainee</option>
                         </select>
                     </div>
                     <div style={{ lineHeight: 2, color: "red", fontSize: 14 }}>{errors?.[name]?.message}</div>
